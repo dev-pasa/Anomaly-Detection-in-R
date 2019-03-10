@@ -1,0 +1,68 @@
+---
+title: "Anomaly Detection in R"
+output: html_document
+---
+
+
+```{r  echo=FALSE, results='hide',message=FALSE}
+library(readr)
+library(dplyr)
+library(tibble)
+library(tibbletime)
+kpi_source <- read.csv("C:/Users/dev/Documents/2 learning/r/Anomaly detection/kpi_source.csv")
+```
+
+```{r}
+mmeKPI <- kpi_source[kpi_source$kpi_name == "EPS_ATTACH_SR_CMM",]
+mmeKPI$spark_start_dt <- gsub("+0000","",mmeKPI$spark_start_dt)
+mmeKPI$spark_start_dt <- gsub("[,+]","",mmeKPI$spark_start_dt)
+mmeKPI <- arrange(mmeKPI, spark_start_dt)
+mmeKPI$Datetime = as.POSIXct(strptime(mmeKPI$spark_start_dt, "%Y-%m-%d %H:%M:%S"))
+mmeKPI$kpi_name <- as.character(mmeKPI$kpi_name)
+mmeKPI_test <- mmeKPI[,c("Datetime","kpi_value"),]
+mmeKPI_test <- arrange(mmeKPI_test, Datetime)
+mmeKPI_test_ts = mmeKPI_test %>% as.tibble()
+```
+
+```{r}
+summary(mmeKPI_test_ts)
+
+```
+```{r}
+
+group_mme <- mmeKPI_test_ts %>% count(Datetime) 
+library(ggplot2)
+ggplot(group_mme) + geom_line(aes(Datetime, n))
+```
+
+```{r}
+library(AnomalyDetection)
+#1440 = 24 hrs * 60 minutes
+res = AnomalyDetectionVec(mmeKPI_test_ts[,2], max_anoms=0.02,
+period=1440, direction='both', only_last=FALSE, plot=TRUE)
+```
+
+```{r}
+res$plot
+```
+```{r}
+res$anoms
+
+```
+
+```{r}
+help(Anomal)
+library(anomalize)
+mme_anomalized <- mmeKPI_test_ts  %>%
+    time_decompose(kpi_value, method = "stl", merge = TRUE) %>%
+    anomalize(remainder, method = "iqr", max_anoms = 0.49) %>%
+    time_recompose() %>%  plot_anomalies(time_recomposed = TRUE, alpha_dots = 0.05)
+mme_anomalized
+```
+
+
+```{r}
+table(mme_anomalized$data$anomaly)
+```
+
+
