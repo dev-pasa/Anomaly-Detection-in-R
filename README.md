@@ -2,6 +2,7 @@
 - Anomaly is defined as something unusual and deviates from the norm or from the general data distribution. 
 - The goal is to analyze a time series data and find data points that do not behave normally. This is different from dealing with outliers which can be defined as anything that deviates from a given quartile range. 
 
+### Published version
 - `The script is published in Rpubs.` 
 - `Rpubs is a free publishing site for r-markdowns and can be implemented from within R-Studio, after generating Knitr file. `
 
