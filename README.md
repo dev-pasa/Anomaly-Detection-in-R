@@ -7,8 +7,8 @@
 
 https://rpubs.com/devshrestha/AnomalyDetection
 
-[ggplot of time-series data](Assets/Anom1.jpg)
-[Anomaly visualization of time-series data](Assets/Anom2.jpg)
+![ggplot of time-series data](Assets/Anom1.jpg)
+![Anomaly visualization of time-series data](Assets/Anom2.jpg)
 
 ### AnomalyDetection R package
 - Source:  
