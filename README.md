@@ -25,7 +25,7 @@ https://github.com/twitter/AnomalyDetection
 3. library(AnomalyDetection)
 
 ## API
-Built a basic model that usese in-built packages in R and used to test it on a data frame. The model produced a list of possible anomalies that might need attention in a real industry scienrio. 
+Built a basic model that usese in-built packages in R and used to test it on a data frame. The model produced a list of possible anomalies that might need attention in a real industry scenario. 
 
 ## Steps to run the script
 - Download and install R-server and R-Studio. 
