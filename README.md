@@ -20,9 +20,9 @@ https://github.com/twitter/AnomalyDetection
 ### Installation guide 
 - Install the R package using the following commands on the R console:
 
-` -install.packages("devtools")
-- devtools::install_github("twitter/AnomalyDetection")
-- library(AnomalyDetection)`
+1. install.packages("devtools")
+2. devtools::install_github("twitter/AnomalyDetection")
+3. library(AnomalyDetection)
 
 ## API
 Built a basic model that usese in-built packages in R and used to test it on the Cereals dataset. 
